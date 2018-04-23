@@ -1,0 +1,86 @@
+{
+  "ldap": {
+    "ip": "xxx.xxx.xxx.xxx",
+    "user": "...CN=xxxx,OU=xxxx,DC=xxx,DC=com",
+    "password": "******",
+    "port": 389,
+    "base_dn": "DC=xxx,DC=com",
+    "receive_timeout": 5,
+    "connect_timeout": 5,
+    "pool_size": 5,
+    "pool_lifetime": 600
+  },
+  "http": {
+    "session": {
+      "link": {
+        "address": [
+          "redis",
+          6379
+        ],
+        "db": 0,
+        "password": null,
+        "minsize": 1,
+        "maxsize": 30
+      },
+      "max_age": 15
+    },
+    "bind": "0.0.0.0",
+    "port": 80
+  },
+  "other_system": {
+    "<system_name>" :{
+      "site": "http://system_api_address",
+      "token": "system auth token ",
+      "timeout": "per http request cost timeout",
+      "other key1": "other value1",
+      "other key2": "other value2"
+    },
+    "issystem": {
+      "description": "don't care the name, just a normal system which provide a lot of info for op-center, you must change it too yourself system, and edit the file op_center/other_system/<system_name>.py",
+      "token": "****",
+      "site": "http://xxx.*********",
+      "timeout": 10
+    },
+    "cmdb": {
+      "description": "see <issystem>",
+      "token": "***",
+      "username": "***",
+      "site": "http://xxx.********",
+      "timeout": 60
+    }
+  },
+  "mq": {
+    "main": {
+      "address": [
+        "redis",
+        6379
+      ],
+      "db": 11,
+      "password": null
+    }
+  },
+  "db": {
+    "host": "mysql",
+    "port": 3306,
+    "db": "op-center",
+    "user": "root",
+    "password": "",
+    "minsize": 3,
+    "maxsize": 10
+  },
+  "worker": {
+    "name": "local-test",
+    "celery": {
+      "ssh": {
+        "connect_timeout": 5,
+        "port": 22,
+        "user": "root",
+        "key_file": "/path/to/ssh/key/for/all/host",
+        "worker_name": "localhost",
+        "worker_count": 5
+      },
+      "broker":"redis://redis/7",
+      "backend":"redis://redis/8"
+    }
+  }
+}
